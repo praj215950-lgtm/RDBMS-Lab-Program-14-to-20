@@ -24,3 +24,20 @@ END $$
 DELIMITER ;
 
 CALL DisplayStudents();
+SET SERVEROUTPUT ON;
+
+DECLARE
+    CURSOR student_cursor IS
+        SELECT StudentID, StudentName, DepartmentID
+        FROM Student;
+
+BEGIN
+    FOR student_record IN student_cursor LOOP
+        DBMS_OUTPUT.PUT_LINE(
+            'Student ID: ' || student_record.StudentID ||
+            ', Name: ' || student_record.StudentName ||
+            ', Department ID: ' || student_record.DepartmentID
+        );
+    END LOOP;
+END;
+/
